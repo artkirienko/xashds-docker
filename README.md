@@ -1,16 +1,15 @@
-[![GitHub Actions Docker Image CI](https://github.com/artkirienko/hlds-docker-dproto/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/artkirienko/hlds-docker-dproto/actions)
-[![HitCount](http://hits.dwyl.com/artkirienko/hlds-docker-dproto.svg)](http://hits.dwyl.com/artkirienko/hlds-docker-dproto)
+[![GitHub Actions Docker Image CI](https://github.com/artkirienko/xashds-docker/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/artkirienko/xashds-docker/actions)
+[![HitCount](http://hits.dwyl.com/artkirienko/xashds-docker.svg)](http://hits.dwyl.com/artkirienko/xashds-docker)
 
 ![banner](banner.png)
 
-# HLDS Docker dproto(47/48 Steam+noSteam)
+# Xash3D FWGS Dedicated Server Docker
 
-## Half-Life Dedicated Server as a Docker image
+## Xash3D FWGS Half-Life Dedicated Server as a Docker image
 
-Probably the fastest and easiest way to set up an old-school Half-Life
-Deathmatch Dedicated Server (HLDS). Both Steam and noSteam, old and new
-half-life clients can connect and play together! You don't need to know
-anything about Linux or HLDS to start a server. You just need Docker and
+Probably the fastest and easiest way to set up an old-school Xash3D FWGS
+Half-Life Deathmatch Dedicated Server (XashDS). You don't need to know
+anything about Linux or XashDS to start a server. You just need Docker and
 this image.
 
 ## Quick Start
@@ -18,42 +17,31 @@ this image.
 Start a new server by running:
 
 ```bash
-docker run -it --rm -d -p27015:27015 -p27015:27015/udp artkirienko/hlds
+docker run -it --rm -d -p27015:27015 -p27015:27015/udp artkirienko/xashds
 ```
 
 Change the player slot size, map or `rcon_password` by running:
 
 ```
-docker run -it --rm -d --name hlds -p27015:27015 -p27015:27015/udp artkirienko/hlds +map crossfire +maxplayers 12 +rcon_password SECRET_PASSWORD
+docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/xashds +map crossfire +maxplayers 12 +rcon_password SECRET_PASSWORD
 ```
 
 > **Note:** Any [server config command](http://sr-team.clan.su/K_stat/hlcommandsfull.html)
-  can be passed by using `+`. But it has to follow after the image name `artkirienko/hlds`.
+  can be passed by using `+`. But it has to follow after the image name `artkirienko/xashds`.
 
 ## What is included
 
-* [HLDS Build](https://github.com/DevilBoy-eXe/hlds) `7882`. This is the last
-  known version that is compatible with last version of **dproto** that's `0.9.582`
+* Latest game assets via **SteamCMD** and
+  [HLDS Build](https://github.com/DevilBoy-eXe/hlds) version `8308`
+
+* [Xash3D] dedicated server
 
   ```
-  Protocol version 47/48
-  Exe version 1.1.2.2/Stdio (valve)
-  Exe build: 17:23:32 May 24 2018 (7882)
+  Xash3D FWGS (build 1032, Linux-i386)
   ```
 
-* [Metamod-p](https://github.com/Bots-United/metamod-p) version `1.21p38`
-
-* [AMX Mod X](https://github.com/alliedmodders/amxmodx) version `1.8.2`
-
-* **dproto** version `0.9.582`. This is the last version of **dproto**,
-  the project is abandoned.
-
-* [jk_botti](https://github.com/Bots-United/jk_botti) version `1.43`
-
-* Patched list of master servers (official and unofficial master servers
-  included), so your game server appear in game server browser of all the clients
-
-* Minimal config present, such as `mp_timelimit` and mapcycle
+* Minimal config present, such as `mp_timelimit`, `public 1`, mapcycle and
+  master server list.
 
 ## Default mapcycle
 
@@ -75,8 +63,8 @@ docker run -it --rm -d --name hlds -p27015:27015 -p27015:27015/udp artkirienko/h
 
 In order to use a custom server config file, add your settings
 to `valve/config/server.cfg` of this project and mount the directory as volume
-to `/opt/steam/hlds/valve/config` by running:
+to `/opt/steam/xashds/valve/config` by running:
 
 ```bash
-docker run -it --rm -d -p27015:27015 -p27015:27015/udp -v $(pwd)/valve/config:/opt/steam/hlds/valve/config artkirienko/hlds
+docker run -it --rm -d -p27015:27015 -p27015:27015/udp -v $(pwd)/valve/config:/opt/steam/xashds/valve/config artkirienko/xashds
 ```

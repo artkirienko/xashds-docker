@@ -1,5 +1,5 @@
 login anonymous
-force_install_dir ./hlds
+force_install_dir ./xashds
 app_set_config 90 mod valve
 app_update 90
 app_update 90

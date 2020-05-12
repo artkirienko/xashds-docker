@@ -1,12 +1,14 @@
-Welcome to HLDS Docker dproto(47/48)
+Welcome to Xash3D FWGS Dedicated Server Docker
 
 
 This server uses Docker.
 For more information visit
-https://github.com/artkirienko/hlds-docker-dproto
+https://github.com/artkirienko/xashds-docker
 
 
 
 
 Love old-school gaming and Half-Life?
-Join us on Discord: https://discord.com/invite/halflife
+Join us on Discord
+Half-Life https://discord.com/invite/halflife
+Xash3D FWGS https://discord.me/fwgs
