@@ -34,7 +34,7 @@ docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/x
 * Latest game assets via **SteamCMD** and
   [HLDS Build](https://github.com/DevilBoy-eXe/hlds) version `8308`
 
-* [Xash3D] dedicated server
+* [Xash3D](https://github.com/FWGS/xash3d) dedicated server
 
   ```
   Xash3D FWGS (build 1032, Linux-i386)
