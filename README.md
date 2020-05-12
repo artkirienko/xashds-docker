@@ -17,28 +17,26 @@ this image.
 Start a new server by running:
 
 ```bash
-docker run -it --rm -d -p27015:27015 -p27015:27015/udp artkirienko/xashds
+docker run -it --rm -d -p27015:27015 -p27015:27015/udp artkirienko/xashds:new-engine
 ```
 
 Change the player slot size, map or `rcon_password` by running:
 
 ```
-docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/xashds +maxplayers 12 +rcon_password SECRET_PASSWORD
+docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/xashds:new-engine +maxplayers 12 +rcon_password SECRET_PASSWORD
 ```
 
 > **Note:** Any [server config command](http://sr-team.clan.su/K_stat/hlcommandsfull.html)
-  can be passed by using `+`. But it has to follow after the image name `artkirienko/xashds`.
+  can be passed by using `+`. But it has to follow after the image name
+  `artkirienko/xashds:new-engine`.
 
 ## What is included
 
 * Latest game assets via **SteamCMD** and
   [HLDS Build](https://github.com/DevilBoy-eXe/hlds) version `8308`
 
-* [Xash3D](https://github.com/FWGS/xash3d) dedicated server
-
-  ```
-  Xash3D FWGS (build 1032, Linux-i386)
-  ```
+* [Xash3D](https://github.com/FWGS/xash3d-fwgs) dedicated server
+  latest build
 
 * [Metamod-p](https://github.com/mittorn/metamod-p) for Xash3D by mittorn
   version `1.21p37`
@@ -71,5 +69,5 @@ to `valve/config/server.cfg` of this project and mount the directory as volume
 to `/opt/steam/xashds/valve/config` by running:
 
 ```bash
-docker run -it --rm -d -p27015:27015 -p27015:27015/udp -v $(pwd)/valve/config:/opt/steam/xashds/valve/config artkirienko/xashds
+docker run -it --rm -d -p27015:27015 -p27015:27015/udp -v $(pwd)/valve/config:/opt/steam/xashds/valve/config artkirienko/xashds:new-engine
 ```

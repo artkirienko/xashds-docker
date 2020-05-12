@@ -43,11 +43,8 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN echo 'deb http://download.opensuse.org/repositories/home:/a1batross/Debian_9.0/ /' > /etc/apt/sources.list.d/home:a1batross.list \
-    && curl -sL https://download.opensuse.org/repositories/home:a1batross/Debian_9.0/Release.key | apt-key add - \
-    && apt-get -y update && apt-get install -y --no-install-recommends xashds=1.0.19.3 \
-    && apt-get -y autoremove \
-    && rm -rf /var/lib/apt/lists/*
+RUN curl -sL https://github.com/FWGS/xash3d-deploy/raw/anewengine-master/xashds-linux-i686 -o /usr/bin/xashds \
+    && chmod +x /usr/bin/xashds
 
 USER steam
 WORKDIR /opt/steam
@@ -102,4 +99,4 @@ EXPOSE 27015/udp
 ENTRYPOINT ["xashds"]
 
 # Default start parameters
-CMD ["+ip 0.0.0.0", "-timeout 3", "-pingboost 1", "+rcon_password 12345678"]
+CMD ["+ip 0.0.0.0", "-timeout 3", "-pingboost 1", "+map crossfire", "+rcon_password 12345678"]

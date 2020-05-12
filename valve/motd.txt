@@ -3,7 +3,7 @@ Welcome to Xash3D FWGS Dedicated Server Docker
 
 This server uses Docker.
 For more information visit
-https://github.com/artkirienko/xashds-docker
+https://github.com/artkirienko/xashds-docker/tree/new-engine
 
 
 
