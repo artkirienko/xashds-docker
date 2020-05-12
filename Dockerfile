@@ -1,8 +1,14 @@
 FROM debian:buster-slim
 
 ARG hlds_build=8308
+ARG amxmod_version=1.8.2
+ARG jk_botti_version=1.43
 ARG steamcmd_url=https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
 ARG hlds_url="https://github.com/DevilBoy-eXe/hlds/releases/download/$hlds_build/hlds_build_$hlds_build.zip"
+ARG metamod_url="https://github.com/mittorn/metamod-p/releases/download/1/metamod.so"
+ARG amxmod_url="http://www.amxmodx.org/release/amxmodx-$amxmod_version-base-linux.tar.gz"
+ARG jk_botti_url="http://koti.kapsi.fi/jukivili/web/jk_botti/jk_botti-$jk_botti_version-release.tar.xz"
+
 ENV XASH3D_BASEDIR=/opt/steam/xashds
 
 # Fix warning:
@@ -65,6 +71,21 @@ RUN mkdir -p "$HOME/.steam" \
 # couldn't exec banned.cfg
 RUN touch /opt/steam/xashds/valve/listip.cfg
 RUN touch /opt/steam/xashds/valve/banned.cfg
+
+# Install Metamod-P (for Xash3D by mittorn)
+RUN mkdir -p /opt/steam/xashds/valve/addons/metamod/dlls \
+    && touch /opt/steam/xashds/valve/addons/metamod/plugins.ini
+RUN curl -sqL "$metamod_url" -o /opt/steam/xashds/valve/addons/metamod/dlls/metamod.so
+RUN sed -i 's/dlls\/hl\.so/addons\/metamod\/dlls\/metamod.so/g' /opt/steam/xashds/valve/liblist.gam
+
+# Install AMX mod X
+RUN curl -sqL "$amxmod_url" | tar -C /opt/steam/xashds/valve/ -zxvf - \
+    && echo 'linux addons/amxmodx/dlls/amxmodx_mm_i386.so' >> /opt/steam/xashds/valve/addons/metamod/plugins.ini
+RUN cat /opt/steam/xashds/valve/mapcycle.txt >> /opt/steam/xashds/valve/addons/amxmodx/configs/maps.ini
+
+# Install jk_botti
+RUN curl -sqL "$jk_botti_url" | tar -C /opt/steam/xashds/valve/ -xJ \
+    && echo 'linux addons/jk_botti/dlls/jk_botti_mm_i386.so' >> /opt/steam/xashds/valve/addons/metamod/plugins.ini
 
 WORKDIR /opt/steam/xashds
 

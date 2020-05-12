@@ -40,8 +40,14 @@ docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/x
   Xash3D FWGS (build 1032, Linux-i386)
   ```
 
-* Minimal config present, such as `mp_timelimit`, `public 1`, mapcycle and
-  master server list.
+* [Metamod-p](https://github.com/mittorn/metamod-p) for Xash3D by mittorn
+  version `1.21p37`
+
+* [AMX Mod X](https://github.com/alliedmodders/amxmodx) version `1.8.2`
+
+* [jk_botti](https://github.com/Bots-United/jk_botti) version `1.43`
+
+* Minimal config present, such as `mp_timelimit`, `public 1` and mapcycle
 
 ## Default mapcycle
 
