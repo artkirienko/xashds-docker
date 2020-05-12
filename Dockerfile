@@ -81,4 +81,4 @@ EXPOSE 27015/udp
 ENTRYPOINT ["xashds"]
 
 # Default start parameters
-# CMD ["-timeout 3", "-pingboost 1", "+map crossfire", "+rcon_password 12345678"]
+CMD ["+ip 0.0.0.0", "-timeout 3", "-pingboost 1", "+rcon_password 12345678"]

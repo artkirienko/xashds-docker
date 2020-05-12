@@ -23,7 +23,7 @@ docker run -it --rm -d -p27015:27015 -p27015:27015/udp artkirienko/xashds
 Change the player slot size, map or `rcon_password` by running:
 
 ```
-docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/xashds +map crossfire +maxplayers 12 +rcon_password SECRET_PASSWORD
+docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/xashds +maxplayers 12 +rcon_password SECRET_PASSWORD
 ```
 
 > **Note:** Any [server config command](http://sr-team.clan.su/K_stat/hlcommandsfull.html)
@@ -47,7 +47,6 @@ docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/x
 
 * crossfire.bsp
 * bounce.bsp
-* crossfire.bsp
 * datacore.bsp
 * frenzy.bsp
 * gasworks.bsp
