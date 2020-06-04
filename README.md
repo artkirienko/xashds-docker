@@ -37,7 +37,7 @@ docker run -it --rm -d --name xash -p27015:27015 -p27015:27015/udp artkirienko/x
 * [Xash3D](https://github.com/FWGS/xash3d) dedicated server
 
   ```
-  Xash3D FWGS (build 1032, Linux-i386)
+  Xash3D FWGS (build 1891, Linux-i386)
   ```
 
 * [Metamod-p](https://github.com/mittorn/metamod-p) for Xash3D by mittorn

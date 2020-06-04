@@ -31,23 +31,30 @@ RUN usermod -a -G games steam
 
 RUN dpkg --add-architecture i386
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
+    build-essential=12.6 \
     ca-certificates=20190110 \
+    cmake=3.13.4-1 \
     curl=7.64.0-4+deb10u1 \
+    git=1:2.20.1-2+deb10u3 \
     gnupg2=2.2.12-1+deb10u1 \
+    g++-multilib=4:8.3.0-1 \
     lib32gcc1=1:8.3.0-6 \
     libstdc++6:i386=8.3.0-6 \
+    python=2.7.16-1 \
     unzip=6.0-23+deb10u1 \
     xz-utils=5.2.4-1 \
     zip=3.0-11+b1 \
  && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN echo 'deb http://download.opensuse.org/repositories/home:/a1batross/Debian_9.0/ /' > /etc/apt/sources.list.d/home:a1batross.list \
-    && curl -sL https://download.opensuse.org/repositories/home:a1batross/Debian_9.0/Release.key | apt-key add - \
-    && apt-get -y update && apt-get install -y --no-install-recommends xashds=1.0.19.3 \
-    && apt-get -y autoremove \
-    && rm -rf /var/lib/apt/lists/*
+RUN git clone --recursive https://github.com/FWGS/xash3d \
+    && mkdir -p xash3d/build
+WORKDIR /xash3d/build
+RUN cmake -DXASH_DEDICATED=ON -DCMAKE_C_FLAGS="-m32" -DCMAKE_CXX_FLAGS="-m32" ../ \
+    && make \
+    && make install \
+    && mv engine/xash3d /usr/local/bin/xashds \
+    && rm -rf /xash3d
 
 USER steam
 WORKDIR /opt/steam
