@@ -31,10 +31,14 @@ RUN usermod -a -G games steam
 
 RUN dpkg --add-architecture i386
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
+    build-essential=12.6 \
     ca-certificates=20190110 \
     curl=7.64.0-4+deb10u1 \
+    git=1:2.20.1-2+deb10u3 \
     gnupg2=2.2.12-1+deb10u1 \
+    g++-multilib=4:8.3.0-1 \
     lib32gcc1=1:8.3.0-6 \
+    python=2.7.16-1 \
     libstdc++6:i386=8.3.0-6 \
     unzip=6.0-23+deb10u1 \
     xz-utils=5.2.4-1 \
@@ -42,9 +46,13 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
  && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -sL https://github.com/FWGS/xash3d-deploy/raw/anewengine-master/xashds-linux-i686 -o /usr/bin/xashds \
-    && chmod +x /usr/bin/xashds
+RUN git clone --recursive https://github.com/FWGS/xash3d-fwgs \
+    && cd xash3d-fwgs \
+    && APP=xashds APPNAME=xashds-linux-i686 ./waf configure -T release -d -W \
+    && ./waf build \
+    && ./waf install \
+    && ln -s /usr/local/xash /usr/local/bin/xashds \
+    && cd .. && rm -rf xash3d-fwgs
 
 USER steam
 WORKDIR /opt/steam
